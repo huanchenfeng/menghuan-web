@@ -9,6 +9,7 @@
         <span class="sm">.{{ siteUrl[1] }}</span>
       </div>
     </div>
+    <LoginRegister />
     <!-- 简介 -->
     <div class="description cards" @click="changeBox">
       <div class="content">
@@ -136,7 +137,7 @@ watch(
 
   .description {
     padding: 1rem;
-    margin-top: 3.5rem;
+    margin-top: 0.5rem;
     max-width: 460px;
     animation: fade 0.5s;
 
