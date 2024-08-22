@@ -4,8 +4,8 @@
       <div class="link">
         <a
           class="left-link"
-          href="https://github.com/example"
           target="_blank"
+          @click="handleLoginClick"
           @mouseenter="socialTip = '登录'"
           @mouseleave="socialTip = '~~~~~~~~~左边登录右边注册~~~~~~~~~'"
         >
@@ -14,8 +14,8 @@
         <span class="tip">{{ socialTip }}</span>
         <a
           class="right-link"
-          href="https://github.com/example"
           target="_blank"
+          @click="handleRegisterClick"
           @mouseenter="socialTip = '注册'"
           @mouseleave="socialTip = '~~~~~~~~~左边登录右边注册~~~~~~~~~'"
         >
@@ -26,9 +26,34 @@
   </template>
   
   <script setup>
-  
+  import { mainStore } from "@/store";
+const store = mainStore();
   // 登录注册提示
   const socialTip = ref("~~~~~~~~~左边登录右边注册~~~~~~~~~");
+// 切换登录注册功能区
+const changeBoxOpenState = (state) => {
+  if (store.getInnerWidth >= 721) {
+    store.boxOpenState = state;
+  } else {
+    ElMessage({
+      message: "当前页面宽度不足以开启盒子",
+      grouping: true,
+      icon: h(Error, {
+        theme: "filled",
+        fill: "#efefef",
+      }),
+    });
+  }
+};
+
+// 用于区分登录和注册的点击事件
+const handleLoginClick = () => {
+  changeBoxOpenState(2);
+};
+
+const handleRegisterClick = () => {
+  changeBoxOpenState(3);
+};
   </script>
   
   <style lang="scss" scoped>

@@ -60,7 +60,7 @@ const descriptionText = reactive({
 // 切换右侧功能区
 const changeBox = () => {
   if (store.getInnerWidth >= 721) {
-    store.boxOpenState = !store.boxOpenState;
+    store.boxOpenState = store.boxOpenState === 0 ? 1 : 0;
   } else {
     ElMessage({
       message: "当前页面宽度不足以开启盒子",
@@ -77,7 +77,7 @@ const changeBox = () => {
 watch(
   () => store.boxOpenState,
   (value) => {
-    if (value) {
+    if (value===1) {
       descriptionText.hello = import.meta.env.VITE_DESC_HELLO_OTHER;
       descriptionText.text = import.meta.env.VITE_DESC_TEXT_OTHER;
     } else {

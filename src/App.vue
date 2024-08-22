@@ -9,8 +9,10 @@
       <div class="container" v-show="!store.backgroundShow">
         <section class="all" v-show="!store.setOpenState">
           <MainLeft />
-          <MainRight v-show="!store.boxOpenState" />
-          <Box v-show="store.boxOpenState" />
+          <MainRight v-show="store.boxOpenState === 0" />
+          <Box v-show="store.boxOpenState === 1" />
+          <Login v-show="store.boxOpenState === 2" />
+          <Register v-show="store.boxOpenState === 3" />
         </section>
         <section class="more" v-show="store.setOpenState" @click="store.setOpenState = false">
           <MoreSet />
@@ -41,6 +43,8 @@ import { Icon } from "@vicons/utils";
 import Loading from "@/components/Loading.vue";
 import MainLeft from "@/views/Main/Left.vue";
 import MainRight from "@/views/Main/Right.vue";
+import Login from "@/views/LoginRegister/Login.vue";
+import Register from "@/views/LoginRegister/Register.vue";
 import Background from "@/components/Background.vue";
 import Footer from "@/components/Footer.vue";
 import Box from "@/views/Box/index.vue";
@@ -70,8 +74,8 @@ watch(
   () => store.innerWidth,
   (value) => {
     if (value < 721) {
-      store.boxOpenState = false;
-      store.setOpenState = false;
+      store.boxOpenState = 0;
+      store.setOpenState = 0;
     }
   },
 );
